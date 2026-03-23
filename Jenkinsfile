@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/niteshsharma99/maven-testng-jenkins.git'
+                    url: 'https://github.com/niteshsharma99/jenkins-docker.git'
             }
         }
 
