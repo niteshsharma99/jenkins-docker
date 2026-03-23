@@ -1,11 +1,16 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
 
-        stage('Clone Code') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/niteshsharma99/jenkins-docker.git'
+                git branch: 'main',
+                    url: 'https://github.com/niteshsharma99/maven-testng-jenkins.git'
             }
         }
 
@@ -19,10 +24,8 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                script {
-                    sh 'docker rm -f my-container || true'
-                    sh 'docker run -d -p 3000:3000 --name my-container my-node-app'
-                }
+                bat 'docker rm -f my-container || exit 0'
+                bat 'docker run -d -p 3000:3000 --name my-container my-node-app'
             }
         }
     }
